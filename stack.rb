@@ -7,5 +7,9 @@ class Stack
     @internal_array.empty?
   end
 
+  def size
+    @internal_array.size
+  end
+
   attr_accessor :internal_array
 end
