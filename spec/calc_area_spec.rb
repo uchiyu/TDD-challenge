@@ -1,10 +1,10 @@
-require './calc_area'
+require './circle'
 require 'RSpec'
 
 RSpec.describe 'circle' do
 
   describe '標準入力の確認' do
-    let(:str_list) { StringIO.new('10\n250\n100\n1.5\n', 'r') }
+    let(:str_list) { StringIO.new("10\n250\n100\n1.5\n", 'r') }
     it { expect( Circle.to_list(str_list.string)).to eq [10, 250, 100, 1.5]}
   end
 
@@ -19,9 +19,13 @@ RSpec.describe 'circle' do
     end
   end
 
-  describe '標準出力の確認' do
-    # sio = StringIO.new('314\n196350\n31416\n7', 'r')
-    it { expect( Circle.output([314, 196350, 31416, 7]) ).to eq '314\n196350\n31416\n7'}
+  describe '結果の確認' do
+    let(:str_list) { StringIO.new("10\n250\n100\n1.5\n", 'r') }
+    let(:writerspy) { WriterSpy.new }
+    it {
+      Circle.output(writerspy, str_list)
+      expect(writerspy.str_list).to eq [314, 196350, 31416, 7]
+    }
   end
 
 end
