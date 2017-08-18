@@ -23,6 +23,14 @@ class EmailValidate
     end
   end
 
+  def self.domain_5(domain)
+    if domain.empty?
+      false
+    else
+      true
+    end
+  end
+
   def self.validate_domain
 
   end
