@@ -1,15 +1,14 @@
-#require './stack'
+require './stack'
 require 'RSpec'
 
 RSpec.describe 'Stack' do
-  #subject { @stack }
-  #before do
-  #  @stack = Stack.new
-  #end
-  it { expect(true).to be true }
-  #describe '#is_empty' do
-  #  context '空の場合true' do
-  #    
-  #  end
-  #end
+  subject { @stack }
+  before do
+   @stack = Stack.new
+  end
+  describe '#is_empty' do
+   it '空の場合true' do
+     expect(@stack.is_empty?).to eq true
+   end
+  end
 end
