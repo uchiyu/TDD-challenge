@@ -45,7 +45,7 @@ RSpec.describe 'email_validate' do
 
   end
 
-  describe 'domain_d1' do
+  describe 'domain_1' do
       let(:domains){[
         "gmail.com",
         "Gmail.com",
@@ -53,7 +53,29 @@ RSpec.describe 'email_validate' do
         ]}
     it {
       domains.each_with_index do |domain|
-        expect(EmailValidate.domain_d1(domain)).to eq true
+        expect(EmailValidate.domain_1(domain)).to eq true
+      end
+    }
+  end
+
+  describe 'domain_234' do
+      let(:success_domains){[
+        "gmail.com",
+        "mi.xi.com"
+        ]}
+        let(:fail_domains){[
+          ".gmail.com",
+          "Gmail.com.",
+          "!Gmainl$..com"
+          ]}
+    it {
+      success_domains.each_with_index do |domain|
+        expect(EmailValidate.domain_234(domain)).to eq true
+      end
+    }
+    it {
+      fail_domains.each_with_index do |domain|
+        expect(EmailValidate.domain_234(domain)).to eq false
       end
     }
   end
