@@ -8,7 +8,7 @@ class EmailValidate
   end
 
   def self.domain_1(domain)
-    if domain =~ /[A-Za-z0-9!#$%&'\*\+-\/=\?^_`\{\|\}~\.]+/
+    if domain.match(/^[A-Za-z0-9!#$%&'\*\+\-\/=\?^_`\{\|\}~\.]+$/)
       true
     else
       false
@@ -31,8 +31,11 @@ class EmailValidate
     end
   end
 
-  def self.validate_domain
-
+  def self.validate_domain(domain)
+    return false unless self.domain_1(domain)
+    return false unless self.domain_234(domain)
+    return false unless self.domain_5(domain)
+    return true
   end
 end
 

@@ -16,26 +16,26 @@ RSpec.describe 'email_validate' do
   end
 
   describe 'split_addr' do
-      let(:addr_test){[
-        "abc@example.com",
-        "yuji@gmail.com",
-        "yu@ji@gmail.com",
-        "yuji@gma@il.com",
-        "@gmail.com",
-        "garu@",
-        "@@@@@",
-        "garu"
-        ]}
-      let(:addr_result){[
-        ["abc", "example.com"],
-        ["yuji","gmail.com"],
-        ["yu@ji", "gmail.com"],
-        ["yuji@gma", "il.com"],
-        ["", "gmail.com"],
-        ["garu", ""],
-        ["@@@@", ""],
-        ["", ""]
-        ]}
+    let(:addr_test){[
+      "abc@example.com",
+      "yuji@gmail.com",
+      "yu@ji@gmail.com",
+      "yuji@gma@il.com",
+      "@gmail.com",
+      "garu@",
+      "@@@@@",
+      "garu"
+    ]}
+    let(:addr_result){[
+      ["abc", "example.com"],
+      ["yuji","gmail.com"],
+      ["yu@ji", "gmail.com"],
+      ["yuji@gma", "il.com"],
+      ["", "gmail.com"],
+      ["garu", ""],
+      ["@@@@", ""],
+      ["", ""]
+    ]}
 
     it {
       addr_test.each_with_index do |addr, i|
@@ -46,28 +46,37 @@ RSpec.describe 'email_validate' do
   end
 
   describe 'domain_1' do
-      let(:domains){[
-        "gmail.com",
-        "Gmail.com",
-        "!Gmainl$.com"
-        ]}
+    let(:success_domains){[
+      "gmail.com",
+      "mi.xi.com"
+    ]}
+    let(:fail_domains){[
+      "Gm@ail.com.",
+      "Gm[ail].com.",
+      "Gmaiあnl$com"
+    ]}
     it {
-      domains.each_with_index do |domain|
+      success_domains.each_with_index do |domain|
         expect(EmailValidate.domain_1(domain)).to eq true
+      end
+    }
+    it {
+      fail_domains.each_with_index do |domain|
+        expect(EmailValidate.domain_1(domain)).to eq false
       end
     }
   end
 
   describe 'domain_234' do
-      let(:success_domains){[
-        "gmail.com",
-        "mi.xi.com"
-        ]}
-        let(:fail_domains){[
-          ".gmail.com",
-          "Gmail.com.",
-          "!Gmainl$..com"
-          ]}
+    let(:success_domains){[
+      "gmail.com",
+      "mi.xi.com"
+    ]}
+    let(:fail_domains){[
+        ".gmail.com",
+        "Gmail.com.",
+        "!Gmainl$..com"
+    ]}
     it {
       success_domains.each_with_index do |domain|
         expect(EmailValidate.domain_234(domain)).to eq true
@@ -82,8 +91,8 @@ RSpec.describe 'email_validate' do
 
   describe 'domain_5' do
       let(:success_domains){[
-        "gmail.com",
-        "mi.xi.com"
+          "gmail.com",
+          "mi.xi.com"
         ]}
         let(:fail_domains){[
           ""
@@ -96,6 +105,30 @@ RSpec.describe 'email_validate' do
     it {
       fail_domains.each_with_index do |domain|
         expect(EmailValidate.domain_5(domain)).to eq false
+      end
+    }
+  end
+
+  describe 'validate_domain' do
+      let(:success_domains){[
+          "example.com",
+          "gmai.l.com",
+        ]}
+        let(:fail_domains){[
+          "ji@gmail.com",
+          "gma@il.com",
+          "@@@@@",
+          "gm!ai..com",
+          ""
+        ]}
+    it {
+      success_domains.each_with_index do |domain|
+        expect(EmailValidate.validate_domain(domain)).to eq true
+      end
+    }
+    it {
+      fail_domains.each_with_index do |domain|
+        expect(EmailValidate.validate_domain(domain)).to eq false
       end
     }
   end
