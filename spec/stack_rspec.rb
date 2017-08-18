@@ -7,8 +7,11 @@ RSpec.describe 'Stack' do
    @stack = Stack.new
   end
   describe '#is_empty' do
-   it '空の場合true' do
+   it '空の場合 true' do
      expect(@stack.is_empty?).to eq true
    end
+   #it 'それ以外 false' do
+   #  expect(@stack.is_empty?).to eq false
+   #end
   end
 end
