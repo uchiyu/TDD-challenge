@@ -45,13 +45,17 @@ RSpec.describe 'email_validate' do
 
   end
 
-  # describe '結果の確認' do
-  #   let(:str_list) { StringIO.new("10\n250\n100\n1.5\n", 'r') }
-  #   let(:writerspy) { WriterSpy.new }
-  #   it {
-  #     Circle.output(writerspy, str_list.string)
-  #     expect(writerspy.str_list).to eq [314, 196350, 31416, 7]
-  #   }
-  # end
+  describe 'domain_d1' do
+      let(:domains){[
+        "gmail.com",
+        "Gmail.com",
+        "!Gmainl$.com"
+        ]}
+    it {
+      domains.each_with_index do |domain|
+        expect(EmailValidate.domain_d1(domain)).to eq true
+      end
+    }
+  end
 
 end

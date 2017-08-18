@@ -7,8 +7,16 @@ class EmailValidate
     [addr.reverse.match(/@/).post_match.reverse, addr.reverse.match(/@/).pre_match.reverse]
   end
 
-  def self.validate_domain
+  def self.domain_d1(domain)
+    if domain =~ /[A-Za-z0-9!#$%&'\*\+-\/=\?^_`\{\|\}~\.]+/
+      true
+    else
+      false
+    end
+  end
 
+  def self.validate_domain
+    
   end
 end
 
