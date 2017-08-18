@@ -23,7 +23,7 @@ RSpec.describe 'circle' do
     let(:str_list) { StringIO.new("10\n250\n100\n1.5\n", 'r') }
     let(:writerspy) { WriterSpy.new }
     it {
-      Circle.output(writerspy, str_list)
+      Circle.output(writerspy, str_list.string)
       expect(writerspy.str_list).to eq [314, 196350, 31416, 7]
     }
   end

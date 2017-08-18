@@ -8,7 +8,7 @@ class Circle
 
   def self.calc_area(num)
     @radius = num
-    area = @radius * @radius * 3.14
+    area = @radius * @radius * Math::PI
     return area.round
   end
 
